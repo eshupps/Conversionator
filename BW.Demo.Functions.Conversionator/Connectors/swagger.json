@@ -1,0 +1,136 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "Apptigent Power Tools PRO",
+    "version": "1.0",
+    "description": "Suite of essential utilities for Microsoft Power Platform"
+  },
+  "host": "bwdemofunctionsconversionator.azurewebsites.net",
+  "basePath": "/api",
+  "schemes": [ "https" ],
+  "securityDefinitions": {
+    "apiKeyHeader": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    },
+    "apiKeyQuery": {
+      "type": "apiKey",
+      "name": "subscription-key",
+      "in": "query"
+    }
+  },
+  "security": [
+    {
+      "apiKeyHeader": []
+    },
+    {
+      "apiKeyQuery": []
+    }
+  ],
+  "paths": {
+    "/ConvertCurrency": {
+      "post": {
+        "description": "Calculate value of money in a difference currency",
+        "operationId": "post-convertcurrency",
+        "summary": "Currency - Convert currency",
+        "tags": [ "Currency" ],
+        "parameters": [
+          {
+            "name": "currencyConversion",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/CurrencyConversion"
+            }
+          }
+        ],
+        "consumes": [ "application/json" ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/basicNumber"
+            }
+          },
+          "400": {
+            "description": "ERROR",
+            "schema": {
+              "$ref": "#/definitions/basicString"
+            }
+          }
+        },
+        "produces": [ "application/json" ]
+      }
+    }
+  },
+  "definitions": {
+    "CurrencyConversion": {
+      "type": "object",
+      "required": [ "input", "source", "target" ],
+      "properties": {
+        "input": {
+          "type": "number",
+          "x-ms-summary": "Value",
+          "description": "Amount to convert"
+        },
+        "source": {
+          "type": "string",
+          "default": "USD",
+          "enum": [ "USD", "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SGD", "SEK", "THB", "TRY", "ZAR" ],
+          "x-ms-summary": "Source currency"
+        },
+        "target": {
+          "type": "string",
+          "enum": [ "USD", "AUD", "BGN", "BRL", "CAD", "CHF", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HRK", "HUF", "IDR", "ILS", "INR", "ISK", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PLN", "RON", "RUB", "SGD", "SEK", "THB", "TRY", "ZAR" ],
+          "x-ms-summary": "Target currency"
+        }
+      },
+      "example": {
+        "input": 100.25,
+        "source": "USD",
+        "target": "CAD"
+      }
+    },
+    "stringInput": {
+      "type": "object",
+      "required": [ "input" ],
+      "properties": {
+        "input": {
+          "type": "string",
+          "x-ms-summary": "Value",
+          "description": "String variable or text value"
+        }
+      },
+      "example": {
+        "input": "The brown cow"
+      }
+    },
+    "basicString": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Value",
+          "x-ms-summary": "Value"
+        }
+      },
+      "example": {
+        "value": "string"
+      }
+    },
+    "basicNumber": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "number",
+          "description": "Value",
+          "x-ms-summary": "Value"
+        }
+      },
+      "example": {
+        "value": 1
+      }
+    }
+  },
+  "tags": []
+}

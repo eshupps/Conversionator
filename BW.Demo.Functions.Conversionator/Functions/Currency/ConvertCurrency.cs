@@ -14,7 +14,7 @@ namespace BW.Demo.Functions.Conversionator
     {
         [FunctionName("ConvertCurrency")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get","post", Route = "convertcurrency")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get","post", Route = "api/convertcurrency")] HttpRequest req,
             ILogger log, Microsoft.Azure.WebJobs.ExecutionContext context)
         {
             //Global variables
@@ -26,13 +26,16 @@ namespace BW.Demo.Functions.Conversionator
 
             try
             {
-                string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-                dynamic data = JsonConvert.DeserializeObject(requestBody);
-                inputValue = inputValue ?? data?.input.ToString();
-                sourceValue = sourceValue ?? data?.source.ToString();
-                targetValue = targetValue ?? data?.target.ToString();
+                using (StreamReader sr = new StreamReader(req.Body))
+                {
+                    string requestBody = await sr.ReadToEndAsync();
+                    dynamic data = JsonConvert.DeserializeObject(requestBody);
+                    inputValue = inputValue ?? data?.input.ToString();
+                    sourceValue = sourceValue ?? data?.source.ToString();
+                    targetValue = targetValue ?? data?.target.ToString();
 
-                log.LogInformation(String.Format("{0},{1},{2},{3},Executing request to convert currency", correlationId, DateTimeUtility.GetCurrentDateTime(), context.FunctionName, product));
+                    log.LogInformation(String.Format("{0},{1},{2},{3},Executing request to convert currency", correlationId, DateTimeUtility.GetCurrentDateTime(), context.FunctionName, product));
+                }
             }
             catch (System.Exception ex)
             {
