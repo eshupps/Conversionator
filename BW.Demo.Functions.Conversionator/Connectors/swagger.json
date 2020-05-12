@@ -1,9 +1,9 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "Apptigent Power Tools PRO",
+    "title": "BinaryWave Conversionator",
     "version": "1.0",
-    "description": "Suite of essential utilities for Microsoft Power Platform"
+    "description": "Simply the BEST conversion utility for Microsoft Power Platform"
   },
   "host": "bwdemofunctionsconversionator.azurewebsites.net",
   "basePath": "/api",
