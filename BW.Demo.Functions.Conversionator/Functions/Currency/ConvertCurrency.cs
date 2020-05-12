@@ -14,7 +14,7 @@ namespace BW.Demo.Functions.Conversionator
     {
         [FunctionName("ConvertCurrency")]
         public static async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get","post", Route = "api/convertcurrency")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get","post", Route = "convertcurrency")] HttpRequest req,
             ILogger log, Microsoft.Azure.WebJobs.ExecutionContext context)
         {
             //Global variables
