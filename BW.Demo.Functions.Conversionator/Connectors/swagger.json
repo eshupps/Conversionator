@@ -31,7 +31,7 @@
   "paths": {
     "/ConvertCurrency": {
       "post": {
-        "description": "Calculate value of money in a difference currency",
+        "description": "Calculate value of money in a different currency",
         "operationId": "post-convertcurrency",
         "summary": "Currency - Convert currency",
         "tags": [ "Currency" ],
